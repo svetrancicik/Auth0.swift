@@ -2,13 +2,29 @@
 
 import PackageDescription
 
-let webAuthPlatforms: [Platform] = [.iOS, .visionOS, .macOS, .macCatalyst]
-let swiftSettings: [SwiftSetting] = [.define("WEB_AUTH_PLATFORM", .when(platforms: webAuthPlatforms))]
+let webAuthPlatforms: [Platform] = [
+    .iOS,
+    .macOS,
+    .macCatalyst,
+    .visionOS
+]
+
+let swiftSettings: [SwiftSetting] = [
+    .define("WEB_AUTH_PLATFORM", .when(platforms: webAuthPlatforms))
+]
 
 let package = Package(
     name: "Auth0",
-    platforms: [.iOS(.v13), .macOS(.v11), .tvOS(.v13), .watchOS(.v7), .visionOS(.v1)],
-    products: [.library(name: "Auth0", targets: ["Auth0"])],
+    platforms: [
+        .iOS(.v13),
+        .macOS(.v11),
+        .tvOS(.v13),
+        .watchOS(.v7),
+        .visionOS(.v1)
+    ],
+    products: [
+        .library(name: "Auth0", targets: ["Auth0"])
+    ],
     dependencies: [
         .package(url: "https://github.com/svetrancicik/SimpleKeychain.git", branch: "simplekeychain-1-1-0"),
         .package(url: "https://github.com/svetrancicik/JWTDecode.swift.git", branch: "jwtdecode-3-1-0"),
