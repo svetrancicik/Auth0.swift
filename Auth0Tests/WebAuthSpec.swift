@@ -432,7 +432,7 @@ class WebAuthSpec: QuickSpec {
 
         }
 
-        #if os(iOS)
+        #if os(iOS) || os(visionOS)
         describe("login") {
 
             var auth: Auth0WebAuth!
