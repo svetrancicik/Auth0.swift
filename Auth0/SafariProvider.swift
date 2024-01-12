@@ -33,7 +33,9 @@ public extension WebAuthentication {
     static func safariProvider(style: UIModalPresentationStyle = .fullScreen) -> WebAuthProvider {
         return { url, callback in
             let safari = SFSafariViewController(url: url)
+            #if !os(visionOS)
             safari.dismissButtonStyle = .cancel
+            #endif
             safari.modalPresentationStyle = style
             return SafariUserAgent(controller: safari, callback: callback)
         }
@@ -83,7 +85,9 @@ class SafariUserAgent: NSObject, WebAuthUserAgent {
         self.controller = controller
         self.callback = callback
         super.init()
+#if !os(visionOS)
         self.controller.delegate = self
+#endif
         self.controller.presentationController?.delegate = self
     }
 
@@ -115,6 +119,7 @@ class SafariUserAgent: NSObject, WebAuthUserAgent {
 
 }
 
+#if !os(visionOS)
 extension SafariUserAgent: SFSafariViewControllerDelegate {
 
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
@@ -125,6 +130,7 @@ extension SafariUserAgent: SFSafariViewControllerDelegate {
     }
 
 }
+#endif
 
 extension SafariUserAgent: UIAdaptivePresentationControllerDelegate {
 
